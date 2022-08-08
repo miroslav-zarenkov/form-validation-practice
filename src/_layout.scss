@@ -1,0 +1,17 @@
+@use "base" as *;
+
+footer {
+  width: 100%;
+  word-break: break-word;
+  background-color: $color-secondary;
+  margin-top: 2rem;
+  border-top: 1px solid gray;
+  div {
+    font-size: 1.6rem;
+  }
+  .github-logo {
+    display: block;
+    width: 32px;
+    height: auto;
+  }
+}

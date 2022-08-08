@@ -1,2 +1,3 @@
-import "./style.scss";
-console.log("Hello, World!");
+import { renderPage } from "./ui";
+
+document.addEventListener("DOMContentLoaded", renderPage);
