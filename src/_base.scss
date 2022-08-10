@@ -1,12 +1,18 @@
 $color-black: #000000;
-$color-white: #fff;
-$color-primary: #d3ab55;
-$color-secondary: #bbb;
+$color-white: #ffffff;
+$color-gray: #f2f2f2;
+$color-primary: #ecd7aa;
+$color-secondary: #18b64e;
 
 %flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+%full-width {
+  width: 100%;
+  height: auto;
 }
 
 .hidden {

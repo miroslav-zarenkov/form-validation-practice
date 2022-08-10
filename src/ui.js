@@ -68,8 +68,8 @@ const createForm = () => {
   formEmailPara.textContent = "E-mail";
   const formEmailInput = document.createElement("input");
   formEmailInput.setAttribute("type", "email");
-  formEmailInput.setAttribute("id", "last-name");
-  formEmailInput.setAttribute("name", "last-name");
+  formEmailInput.setAttribute("id", "email");
+  formEmailInput.setAttribute("name", "email");
   formEmailInput.setAttribute("maxlength", "30");
   formEmailInput.setAttribute("placeholder", "stevejobs@apple.com");
   formEmailInput.setAttribute("required", "");

@@ -8,7 +8,12 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Form Validation Practice",
+      favicon: "./src/favicon.ico",
+    }),
+  ],
   module: {
     rules: [
       {

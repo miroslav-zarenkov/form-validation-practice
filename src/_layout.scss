@@ -1,12 +1,13 @@
 @use "base" as *;
 
 header {
-  @extend %flex-center;
-  width: 100%;
   background-color: $color-secondary;
   border-bottom: 1px solid gray;
+  font-family: Tahoma, Verdana, sans-serif;
+  @extend %full-width;
+  @extend %flex-center;
   h1 {
-    font-size: 6rem;
+    font-size: clamp(2rem, calc(2rem + ((1vw - 0.21875rem) * 4.586)), 6rem);
     margin: 1rem;
     padding: 1rem;
   }
@@ -14,23 +15,27 @@ header {
 
 main {
   flex: 1 0 auto;
-  display: flex;
   flex-direction: column;
+  background-color: $color-gray;
+  @extend %full-width;
+  @extend %flex-center;
 }
 
 footer {
-  @extend %flex-center;
-  width: 100%;
   word-break: break-word;
   background-color: $color-secondary;
-  margin-top: 2rem;
   border-top: 1px solid gray;
+  font-family: Tahoma, Verdana, sans-serif;
+  @extend %full-width;
+  @extend %flex-center;
   div {
-    font-size: 1.6rem;
+    font-size: 1.75rem;
+    margin: 0.5rem;
   }
   .github-logo {
     display: block;
     width: 32px;
     height: auto;
+    margin: 0.5rem;
   }
 }
