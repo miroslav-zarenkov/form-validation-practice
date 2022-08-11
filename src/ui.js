@@ -1,6 +1,7 @@
 export { renderPage };
 import "./style.scss";
 import GithubLogo from "./github.png";
+import { clearFormInputs, submitForm, formNumberInputLimit } from "./logic";
 
 const createWrapper = () => {
   const mainWrapper = document.createElement("div");
@@ -39,6 +40,7 @@ const createForm = () => {
   formFirstNameInput.setAttribute("required", "");
   const formFirstNameErrorPara = document.createElement("p");
   formFirstNameErrorPara.classList.add("hidden");
+  formFirstNameErrorPara.classList.add("error-p");
   formFirstNameErrorPara.setAttribute("id", "first-name-error-p");
   formFirstNameErrorPara.textContent = "Everything OK!";
   formFirstName.appendChild(formFirstNamePara);
@@ -57,6 +59,7 @@ const createForm = () => {
   formLastNameInput.setAttribute("required", "");
   const formLastNameErrorPara = document.createElement("p");
   formLastNameErrorPara.classList.add("hidden");
+  formLastNameErrorPara.classList.add("error-p");
   formLastNameErrorPara.setAttribute("id", "last-name-error-p");
   formLastNameErrorPara.textContent = "Everything OK!";
   formLastName.appendChild(formLastNamePara);
@@ -75,6 +78,7 @@ const createForm = () => {
   formEmailInput.setAttribute("required", "");
   const formEmailErrorPara = document.createElement("p");
   formEmailErrorPara.classList.add("hidden");
+  formEmailErrorPara.classList.add("error-p");
   formEmailErrorPara.setAttribute("id", "email-error-p");
   formEmailErrorPara.textContent = "Everything OK!";
   formEmail.appendChild(formEmailPara);
@@ -93,6 +97,7 @@ const createForm = () => {
   formCountryInput.setAttribute("required", "");
   const formCountryErrorPara = document.createElement("p");
   formCountryErrorPara.classList.add("hidden");
+  formCountryErrorPara.classList.add("error-p");
   formCountryErrorPara.setAttribute("id", "country-error-p");
   formCountryErrorPara.textContent = "Everything OK!";
   formCountry.appendChild(formCountryPara);
@@ -111,6 +116,7 @@ const createForm = () => {
   formZipCodeInput.setAttribute("required", "");
   const formZipCodeErrorPara = document.createElement("p");
   formZipCodeErrorPara.classList.add("hidden");
+  formZipCodeErrorPara.classList.add("error-p");
   formZipCodeErrorPara.setAttribute("id", "zip-code-error-p");
   formZipCodeErrorPara.textContent = "Everything OK!";
   formZipCode.appendChild(formZipCodePara);
@@ -129,6 +135,7 @@ const createForm = () => {
   formPasswordInput.setAttribute("required", "");
   const formPasswordErrorPara = document.createElement("p");
   formPasswordErrorPara.classList.add("hidden");
+  formPasswordErrorPara.classList.add("error-p");
   formPasswordErrorPara.setAttribute("id", "password-error-p");
   formPasswordErrorPara.textContent = "Everything OK!";
   formPassword.appendChild(formPasswordPara);
@@ -147,6 +154,7 @@ const createForm = () => {
   formPasswordConfirmationInput.setAttribute("required", "");
   const formPasswordConfirmationErrorPara = document.createElement("p");
   formPasswordConfirmationErrorPara.classList.add("hidden");
+  formPasswordConfirmationErrorPara.classList.add("error-p");
   formPasswordConfirmationErrorPara.setAttribute(
     "id",
     "password-confirmation-error-p"
@@ -202,7 +210,12 @@ const createPage = (event) => {
 };
 
 const initialiseEventListeners = () => {
-  console.log("initialiseEventListeners");
+  document
+    .querySelector(".submit-form-button")
+    .addEventListener("click", submitForm);
+  document
+    .querySelector("#zip-code")
+    .addEventListener("keypress", formNumberInputLimit);
 };
 
 const renderPage = (event) => {

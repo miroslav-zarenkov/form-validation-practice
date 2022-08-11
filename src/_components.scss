@@ -29,6 +29,15 @@
             outline-color: $color-secondary;
             border-color: $color-secondary;
           }
+          &.invalid-data {
+            border: 0.1rem solid;
+            border-color: $color-red;
+            outline-color: $color-red;
+            &:focus {
+              outline-color: $color-red;
+              border-color: $color-red;
+            }
+          }
         }
       }
       div {
@@ -90,4 +99,13 @@
       }
     }
   }
+  .submitted-data-div {
+    border: 1px solid gray;
+    height: 30rem;
+    width: 30rem;
+    font-size: 10rem;
+  }
+}
+.error-p-invalid {
+  color: red;
 }
