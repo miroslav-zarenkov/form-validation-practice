@@ -22,9 +22,10 @@
         input {
           font-family: "Gill Sans", sans-serif;
           margin: 0.5rem;
-          padding: 0.5rem;
+          padding: 0.5rem 40px 0.5rem 0.5rem;
           font-size: 2rem;
-          width: 75%;
+
+          max-width: 75%;
           &:focus {
             outline-color: $color-secondary;
             border-color: $color-secondary;
@@ -38,6 +39,27 @@
               border-color: $color-red;
             }
           }
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        input[type="number"] {
+          -moz-appearance: textfield;
+        }
+        .validation-icon {
+          text-align: center;
+          width: 32px;
+          height: auto;
+        }
+        span {
+          position: relative;
+          float: right;
+          top: 8px;
+          right: 90px;
+          width: 0;
         }
       }
       div {
@@ -107,5 +129,5 @@
   }
 }
 .error-p-invalid {
-  color: red;
+  color: $color-red;
 }

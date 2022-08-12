@@ -1,7 +1,14 @@
 export { renderPage };
 import "./style.scss";
 import GithubLogo from "./github.png";
-import { clearFormInputs, submitForm, formNumberInputLimit } from "./logic";
+import {
+  submitForm,
+  formNumberInputLimit,
+  formTextInputValidation,
+  formEmailInputValidation,
+  formNumberInputValidation,
+} from "./logic";
+import ValidInputIcon from "./valid.png";
 
 const createWrapper = () => {
   const mainWrapper = document.createElement("div");
@@ -38,6 +45,11 @@ const createForm = () => {
   formFirstNameInput.setAttribute("maxlength", "30");
   formFirstNameInput.setAttribute("placeholder", "Steve");
   formFirstNameInput.setAttribute("required", "");
+  const formFirstNameValidationIcon = document.createElement("span");
+  const formFirstNameValidationIconApprove = document.createElement("img");
+  formFirstNameValidationIconApprove.classList.add("validation-icon");
+  /*  formFirstNameValidationIconApprove.setAttribute("src", ValidInputIcon); */
+  formFirstNameValidationIcon.appendChild(formFirstNameValidationIconApprove);
   const formFirstNameErrorPara = document.createElement("p");
   formFirstNameErrorPara.classList.add("hidden");
   formFirstNameErrorPara.classList.add("error-p");
@@ -45,6 +57,7 @@ const createForm = () => {
   formFirstNameErrorPara.textContent = "Everything OK!";
   formFirstName.appendChild(formFirstNamePara);
   formFirstName.appendChild(formFirstNameInput);
+  formFirstName.appendChild(formFirstNameValidationIcon);
   formFirstName.appendChild(formFirstNameErrorPara);
 
   const formLastName = document.createElement("label");
@@ -74,7 +87,8 @@ const createForm = () => {
   formEmailInput.setAttribute("id", "email");
   formEmailInput.setAttribute("name", "email");
   formEmailInput.setAttribute("maxlength", "30");
-  formEmailInput.setAttribute("placeholder", "stevejobs@apple.com");
+  formEmailInput.setAttribute("placeholder", "sjobs@apple.com");
+  formEmailInput.setAttribute("pattern", "[a-zA-Z]+@[a-zA-Z]+");
   formEmailInput.setAttribute("required", "");
   const formEmailErrorPara = document.createElement("p");
   formEmailErrorPara.classList.add("hidden");
@@ -93,7 +107,7 @@ const createForm = () => {
   formCountryInput.setAttribute("id", "country");
   formCountryInput.setAttribute("name", "country");
   formCountryInput.setAttribute("maxlength", "30");
-  formCountryInput.setAttribute("placeholder", "Murica");
+  formCountryInput.setAttribute("placeholder", "USA");
   formCountryInput.setAttribute("required", "");
   const formCountryErrorPara = document.createElement("p");
   formCountryErrorPara.classList.add("hidden");
@@ -112,7 +126,8 @@ const createForm = () => {
   formZipCodeInput.setAttribute("id", "zip-code");
   formZipCodeInput.setAttribute("name", "zip-code");
   formZipCodeInput.setAttribute("maxlength", "30");
-  formZipCodeInput.setAttribute("placeholder", "96162");
+  formZipCodeInput.setAttribute("min", "0");
+  formZipCodeInput.setAttribute("placeholder", "94301");
   formZipCodeInput.setAttribute("required", "");
   const formZipCodeErrorPara = document.createElement("p");
   formZipCodeErrorPara.classList.add("hidden");
@@ -131,7 +146,6 @@ const createForm = () => {
   formPasswordInput.setAttribute("id", "password");
   formPasswordInput.setAttribute("name", "password");
   formPasswordInput.setAttribute("maxlength", "30");
-  formPasswordInput.setAttribute("placeholder", "kek-123");
   formPasswordInput.setAttribute("required", "");
   const formPasswordErrorPara = document.createElement("p");
   formPasswordErrorPara.classList.add("hidden");
@@ -150,7 +164,6 @@ const createForm = () => {
   formPasswordConfirmationInput.setAttribute("id", "password-confirmation");
   formPasswordConfirmationInput.setAttribute("name", "password-confirmation");
   formPasswordConfirmationInput.setAttribute("maxlength", "30");
-  formPasswordConfirmationInput.setAttribute("placeholder", "kek-123");
   formPasswordConfirmationInput.setAttribute("required", "");
   const formPasswordConfirmationErrorPara = document.createElement("p");
   formPasswordConfirmationErrorPara.classList.add("hidden");
@@ -211,11 +224,42 @@ const createPage = (event) => {
 
 const initialiseEventListeners = () => {
   document
-    .querySelector(".submit-form-button")
-    .addEventListener("click", submitForm);
+    .querySelector("#first-name")
+    .addEventListener("input", formTextInputValidation);
+  document
+    .querySelector("#first-name")
+    .addEventListener("focusout", formTextInputValidation);
+  document
+    .querySelector("#last-name")
+    .addEventListener("input", formTextInputValidation);
+  document
+    .querySelector("#last-name")
+    .addEventListener("focusout", formTextInputValidation);
+  document
+    .querySelector("#email")
+    .addEventListener("input", formEmailInputValidation);
+  document
+    .querySelector("#email")
+    .addEventListener("focusout", formEmailInputValidation);
+  document
+    .querySelector("#country")
+    .addEventListener("input", formTextInputValidation);
+  document
+    .querySelector("#country")
+    .addEventListener("focusout", formTextInputValidation);
   document
     .querySelector("#zip-code")
     .addEventListener("keypress", formNumberInputLimit);
+  document
+    .querySelector("#zip-code")
+    .addEventListener("input", formNumberInputValidation);
+  document
+    .querySelector("#zip-code")
+    .addEventListener("focusout", formNumberInputValidation);
+
+  document
+    .querySelector(".submit-form-button")
+    .addEventListener("click", submitForm);
 };
 
 const renderPage = (event) => {
