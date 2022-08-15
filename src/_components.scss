@@ -24,7 +24,7 @@
           margin: 0.5rem;
           padding: 0.5rem 40px 0.5rem 0.5rem;
           font-size: 2rem;
-
+          border: 1.5px solid darken($color-gray, 33%);
           max-width: 75%;
           &:focus {
             outline-color: $color-blue;
@@ -83,6 +83,9 @@
         font-size: 19px;
         color: black;
         z-index: 1;
+        &:focus {
+          outline-color: $color-blue;
+        }
         &:before {
           content: "";
           position: absolute;

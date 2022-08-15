@@ -26,6 +26,7 @@ const clearFormInputs = () => {
   inputCollection.forEach((element) => {
     element.value = "";
     element.classList.remove("invalid-data");
+    element.classList.remove("valid-data");
   });
   const errorParaCollection = document.querySelectorAll(".error-p");
   errorParaCollection.forEach((element) => {
@@ -38,6 +39,7 @@ const clearFormInputs = () => {
 const formTextInputValidation = (event) => {
   if (event.target.validity.valid) {
     event.target.classList.remove("invalid-data");
+    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Everything OK!";
     event.target.parentNode
@@ -50,13 +52,13 @@ const formTextInputValidation = (event) => {
   } else if (event.target.validity.valueMissing) {
     const inputName = event.target.previousElementSibling.textContent;
     event.target.classList.add("invalid-data");
+    event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(
       ".error-p"
     ).textContent = `You Forgot Your ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -65,12 +67,12 @@ const formTextInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   } else {
     event.target.classList.add("invalid-data");
+    event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "This should never happen";
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -79,7 +81,8 @@ const formTextInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   }
   if (event.target.value.length === 30) {
-    event.target.classList.add("invalid-data");
+    event.target.classList.remove("invalid-data");
+    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Maximum 30 characters";
     event.target.parentNode
@@ -88,7 +91,6 @@ const formTextInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.classList.remove("invalid-data");
     event.target.parentNode
       .querySelector("img")
       .setAttribute("src", ValidInputIcon);
@@ -98,6 +100,7 @@ const formTextInputValidation = (event) => {
 const formNumberInputValidation = (event) => {
   if (event.target.validity.valid) {
     event.target.classList.remove("invalid-data");
+    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Everything OK!";
     event.target.parentNode
@@ -109,12 +112,12 @@ const formNumberInputValidation = (event) => {
       .setAttribute("src", ValidInputIcon);
   } else if (event.target.validity.patternMismatch) {
     event.target.classList.add("invalid-data");
+    event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Wrong pattern";
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -124,13 +127,13 @@ const formNumberInputValidation = (event) => {
   } else if (event.target.validity.valueMissing) {
     const inputName = event.target.previousElementSibling.textContent;
     event.target.classList.add("invalid-data");
+    event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(
       ".error-p"
     ).textContent = `You Forgot Your ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -153,7 +156,8 @@ const formNumberInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   }
   if (event.target.value.length === 30) {
-    event.target.classList.add("invalid-data");
+    event.target.classList.remove("invalid-data");
+    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Maximum 30 characters";
     event.target.parentNode
@@ -162,7 +166,6 @@ const formNumberInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.classList.remove("invalid-data");
     event.target.parentNode
       .querySelector("img")
       .setAttribute("src", ValidInputIcon);
@@ -172,6 +175,7 @@ const formNumberInputValidation = (event) => {
 const formEmailInputValidation = (event) => {
   if (event.target.validity.valid) {
     event.target.classList.remove("invalid-data");
+    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Everything OK!";
     event.target.parentNode
@@ -183,12 +187,12 @@ const formEmailInputValidation = (event) => {
       .setAttribute("src", ValidInputIcon);
   } else if (event.target.validity.patternMismatch) {
     event.target.classList.add("invalid-data");
+    event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Wrong pattern";
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -204,7 +208,6 @@ const formEmailInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -213,12 +216,12 @@ const formEmailInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   } else {
     event.target.classList.add("invalid-data");
+    event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "This should never happen";
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
-    event.target.classList.add("invalid-data");
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("hidden");
@@ -228,7 +231,8 @@ const formEmailInputValidation = (event) => {
   }
   console.log("kek");
   if (event.target.value.length === 30) {
-    event.target.classList.add("invalid-data");
+    event.target.classList.remove("invalid-data");
+    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Maximum 30 characters";
     event.target.parentNode
@@ -237,7 +241,6 @@ const formEmailInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.classList.remove("invalid-data");
     event.target.parentNode
       .querySelector("img")
       .setAttribute("src", ValidInputIcon);
