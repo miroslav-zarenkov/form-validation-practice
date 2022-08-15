@@ -1,7 +1,7 @@
 @use "base" as *;
 
 header {
-  background-color: $color-secondary;
+  background-color: $color-green;
   border-bottom: 1px solid gray;
   font-family: Tahoma, Verdana, sans-serif;
   @extend %full-width;
@@ -23,7 +23,7 @@ main {
 
 footer {
   word-break: break-word;
-  background-color: $color-secondary;
+  background-color: $color-green;
   border-top: 1px solid gray;
   font-family: Tahoma, Verdana, sans-serif;
   @extend %full-width;

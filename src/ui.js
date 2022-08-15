@@ -45,11 +45,12 @@ const createForm = () => {
   formFirstNameInput.setAttribute("maxlength", "30");
   formFirstNameInput.setAttribute("placeholder", "Steve");
   formFirstNameInput.setAttribute("required", "");
-  const formFirstNameValidationIcon = document.createElement("span");
-  const formFirstNameValidationIconApprove = document.createElement("img");
-  formFirstNameValidationIconApprove.classList.add("validation-icon");
-  /*  formFirstNameValidationIconApprove.setAttribute("src", ValidInputIcon); */
-  formFirstNameValidationIcon.appendChild(formFirstNameValidationIconApprove);
+
+  const formFirstNameValidationIconSpan = document.createElement("span");
+  const formFirstNameValidationIconImg = document.createElement("img");
+  formFirstNameValidationIconImg.classList.add("validation-icon");
+  formFirstNameValidationIconSpan.appendChild(formFirstNameValidationIconImg);
+
   const formFirstNameErrorPara = document.createElement("p");
   formFirstNameErrorPara.classList.add("hidden");
   formFirstNameErrorPara.classList.add("error-p");
@@ -57,7 +58,7 @@ const createForm = () => {
   formFirstNameErrorPara.textContent = "Everything OK!";
   formFirstName.appendChild(formFirstNamePara);
   formFirstName.appendChild(formFirstNameInput);
-  formFirstName.appendChild(formFirstNameValidationIcon);
+  formFirstName.appendChild(formFirstNameValidationIconSpan);
   formFirstName.appendChild(formFirstNameErrorPara);
 
   const formLastName = document.createElement("label");
@@ -70,6 +71,12 @@ const createForm = () => {
   formLastNameInput.setAttribute("maxlength", "30");
   formLastNameInput.setAttribute("placeholder", "Jobs");
   formLastNameInput.setAttribute("required", "");
+
+  const formLastNameValidationIconSpan = document.createElement("span");
+  const formLastNameValidationIconImg = document.createElement("img");
+  formLastNameValidationIconImg.classList.add("validation-icon");
+  formLastNameValidationIconSpan.appendChild(formLastNameValidationIconImg);
+
   const formLastNameErrorPara = document.createElement("p");
   formLastNameErrorPara.classList.add("hidden");
   formLastNameErrorPara.classList.add("error-p");
@@ -77,6 +84,7 @@ const createForm = () => {
   formLastNameErrorPara.textContent = "Everything OK!";
   formLastName.appendChild(formLastNamePara);
   formLastName.appendChild(formLastNameInput);
+  formLastName.appendChild(formLastNameValidationIconSpan);
   formLastName.appendChild(formLastNameErrorPara);
 
   const formEmail = document.createElement("label");
@@ -90,6 +98,10 @@ const createForm = () => {
   formEmailInput.setAttribute("placeholder", "sjobs@apple.com");
   formEmailInput.setAttribute("pattern", "[a-zA-Z]+@[a-zA-Z]+");
   formEmailInput.setAttribute("required", "");
+  const formEmailValidationIconSpan = document.createElement("span");
+  const formEmailValidationIconImg = document.createElement("img");
+  formEmailValidationIconImg.classList.add("validation-icon");
+  formEmailValidationIconSpan.appendChild(formEmailValidationIconImg);
   const formEmailErrorPara = document.createElement("p");
   formEmailErrorPara.classList.add("hidden");
   formEmailErrorPara.classList.add("error-p");
@@ -97,6 +109,7 @@ const createForm = () => {
   formEmailErrorPara.textContent = "Everything OK!";
   formEmail.appendChild(formEmailPara);
   formEmail.appendChild(formEmailInput);
+  formEmail.appendChild(formEmailValidationIconSpan);
   formEmail.appendChild(formEmailErrorPara);
 
   const formCountry = document.createElement("label");
@@ -109,6 +122,10 @@ const createForm = () => {
   formCountryInput.setAttribute("maxlength", "30");
   formCountryInput.setAttribute("placeholder", "USA");
   formCountryInput.setAttribute("required", "");
+  const formCountryValidationIconSpan = document.createElement("span");
+  const formCountryValidationIconImg = document.createElement("img");
+  formCountryValidationIconImg.classList.add("validation-icon");
+  formCountryValidationIconSpan.appendChild(formCountryValidationIconImg);
   const formCountryErrorPara = document.createElement("p");
   formCountryErrorPara.classList.add("hidden");
   formCountryErrorPara.classList.add("error-p");
@@ -116,6 +133,7 @@ const createForm = () => {
   formCountryErrorPara.textContent = "Everything OK!";
   formCountry.appendChild(formCountryPara);
   formCountry.appendChild(formCountryInput);
+  formCountry.appendChild(formCountryValidationIconSpan);
   formCountry.appendChild(formCountryErrorPara);
 
   const formZipCode = document.createElement("label");
@@ -129,6 +147,10 @@ const createForm = () => {
   formZipCodeInput.setAttribute("min", "0");
   formZipCodeInput.setAttribute("placeholder", "94301");
   formZipCodeInput.setAttribute("required", "");
+  const formZipCodeValidationIconSpan = document.createElement("span");
+  const formZipCodeValidationIconImg = document.createElement("img");
+  formZipCodeValidationIconImg.classList.add("validation-icon");
+  formZipCodeValidationIconSpan.appendChild(formZipCodeValidationIconImg);
   const formZipCodeErrorPara = document.createElement("p");
   formZipCodeErrorPara.classList.add("hidden");
   formZipCodeErrorPara.classList.add("error-p");
@@ -136,6 +158,7 @@ const createForm = () => {
   formZipCodeErrorPara.textContent = "Everything OK!";
   formZipCode.appendChild(formZipCodePara);
   formZipCode.appendChild(formZipCodeInput);
+  formZipCode.appendChild(formZipCodeValidationIconSpan);
   formZipCode.appendChild(formZipCodeErrorPara);
 
   const formPassword = document.createElement("label");
@@ -147,6 +170,10 @@ const createForm = () => {
   formPasswordInput.setAttribute("name", "password");
   formPasswordInput.setAttribute("maxlength", "30");
   formPasswordInput.setAttribute("required", "");
+  const formPasswordValidationIconSpan = document.createElement("span");
+  const formPasswordValidationIconImg = document.createElement("img");
+  formPasswordValidationIconImg.classList.add("validation-icon");
+  formPasswordValidationIconSpan.appendChild(formPasswordValidationIconImg);
   const formPasswordErrorPara = document.createElement("p");
   formPasswordErrorPara.classList.add("hidden");
   formPasswordErrorPara.classList.add("error-p");
@@ -154,6 +181,7 @@ const createForm = () => {
   formPasswordErrorPara.textContent = "Everything OK!";
   formPassword.appendChild(formPasswordPara);
   formPassword.appendChild(formPasswordInput);
+  formPassword.appendChild(formPasswordValidationIconSpan);
   formPassword.appendChild(formPasswordErrorPara);
 
   const formPasswordConfirmation = document.createElement("label");
@@ -165,6 +193,14 @@ const createForm = () => {
   formPasswordConfirmationInput.setAttribute("name", "password-confirmation");
   formPasswordConfirmationInput.setAttribute("maxlength", "30");
   formPasswordConfirmationInput.setAttribute("required", "");
+  const formPasswordConfirmationValidationIconSpan =
+    document.createElement("span");
+  const formPasswordConfirmationValidationIconImg =
+    document.createElement("img");
+  formPasswordConfirmationValidationIconImg.classList.add("validation-icon");
+  formPasswordConfirmationValidationIconSpan.appendChild(
+    formPasswordConfirmationValidationIconImg
+  );
   const formPasswordConfirmationErrorPara = document.createElement("p");
   formPasswordConfirmationErrorPara.classList.add("hidden");
   formPasswordConfirmationErrorPara.classList.add("error-p");
@@ -175,6 +211,9 @@ const createForm = () => {
   formPasswordConfirmationErrorPara.textContent = "Everything OK!";
   formPasswordConfirmation.appendChild(formPasswordConfirmationPara);
   formPasswordConfirmation.appendChild(formPasswordConfirmationInput);
+  formPasswordConfirmation.appendChild(
+    formPasswordConfirmationValidationIconSpan
+  );
   formPasswordConfirmation.appendChild(formPasswordConfirmationErrorPara);
 
   const formButtonWrapper = document.createElement("div");

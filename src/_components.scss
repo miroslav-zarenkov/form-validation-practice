@@ -27,11 +27,18 @@
 
           max-width: 75%;
           &:focus {
-            outline-color: $color-secondary;
-            border-color: $color-secondary;
+            outline-color: $color-blue;
+            border-color: $color-blue;
+          }
+          &.valid-data {
+            border-color: $color-green;
+            outline-color: $color-green;
+            &:focus {
+              outline-color: $color-green;
+              border-color: $color-green;
+            }
           }
           &.invalid-data {
-            border: 0.1rem solid;
             border-color: $color-red;
             outline-color: $color-red;
             &:focus {
@@ -98,7 +105,7 @@
           top: 180%;
           width: 160%;
           height: 190%;
-          background-color: $color-secondary;
+          background-color: $color-green;
           border-radius: 50%;
           display: block;
           transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
@@ -106,16 +113,16 @@
         }
         &:hover {
           color: #ffffff;
-          border: 1px solid $color-secondary;
+          border: 1px solid $color-green;
         }
         &:hover:before {
           top: -35%;
-          background-color: $color-secondary;
+          background-color: $color-green;
           transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
         }
         &:hover:after {
           top: -45%;
-          background-color: $color-secondary;
+          background-color: $color-green;
           transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
         }
       }
