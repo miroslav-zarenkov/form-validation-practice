@@ -7,8 +7,9 @@ import {
   formTextInputValidation,
   formEmailInputValidation,
   formNumberInputValidation,
+  formPasswordInputValidation,
+  formPasswordConfimationInputValidation,
 } from "./logic";
-import ValidInputIcon from "./valid.png";
 
 const createWrapper = () => {
   const mainWrapper = document.createElement("div");
@@ -96,7 +97,10 @@ const createForm = () => {
   formEmailInput.setAttribute("name", "email");
   formEmailInput.setAttribute("maxlength", "30");
   formEmailInput.setAttribute("placeholder", "sjobs@apple.com");
-  formEmailInput.setAttribute("pattern", "[a-zA-Z]+@[a-zA-Z]+");
+  formEmailInput.setAttribute(
+    "pattern",
+    "[[a-zA-Z0-9-_+.]+@[a-zA-Z]+[.]+[a-zA-Z]+"
+  );
   formEmailInput.setAttribute("required", "");
   const formEmailValidationIconSpan = document.createElement("span");
   const formEmailValidationIconImg = document.createElement("img");
@@ -140,12 +144,13 @@ const createForm = () => {
   const formZipCodePara = document.createElement("p");
   formZipCodePara.textContent = "Zip Code";
   const formZipCodeInput = document.createElement("input");
-  formZipCodeInput.setAttribute("type", "number");
+  formZipCodeInput.setAttribute("type", "text");
   formZipCodeInput.setAttribute("id", "zip-code");
   formZipCodeInput.setAttribute("name", "zip-code");
-  formZipCodeInput.setAttribute("maxlength", "30");
+  formZipCodeInput.setAttribute("maxlength", "5");
   formZipCodeInput.setAttribute("min", "0");
   formZipCodeInput.setAttribute("placeholder", "94301");
+  formZipCodeInput.setAttribute("pattern", "[0-9]{5}");
   formZipCodeInput.setAttribute("required", "");
   const formZipCodeValidationIconSpan = document.createElement("span");
   const formZipCodeValidationIconImg = document.createElement("img");
@@ -169,6 +174,10 @@ const createForm = () => {
   formPasswordInput.setAttribute("id", "password");
   formPasswordInput.setAttribute("name", "password");
   formPasswordInput.setAttribute("maxlength", "30");
+  formPasswordInput.setAttribute(
+    "pattern",
+    "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
+  );
   formPasswordInput.setAttribute("required", "");
   const formPasswordValidationIconSpan = document.createElement("span");
   const formPasswordValidationIconImg = document.createElement("img");
@@ -179,10 +188,30 @@ const createForm = () => {
   formPasswordErrorPara.classList.add("error-p");
   formPasswordErrorPara.setAttribute("id", "password-error-p");
   formPasswordErrorPara.textContent = "Everything OK!";
+  const formPasswordPatternDiv = document.createElement("div");
+  formPasswordPatternDiv.classList.add("password-pattern");
+  const formPasswordPatternDivOne = document.createElement("div");
+  formPasswordPatternDivOne.classList.add("password-pattern-element");
+  formPasswordPatternDivOne.textContent = "lorem";
+  const formPasswordPatternDivTwo = document.createElement("div");
+  formPasswordPatternDivTwo.classList.add("password-pattern-element");
+  formPasswordPatternDivTwo.textContent = "lorem";
+  const formPasswordPatternDivThree = document.createElement("div");
+  formPasswordPatternDivThree.classList.add("password-pattern-element");
+  formPasswordPatternDivThree.textContent = "lorem";
+  const formPasswordPatternDivFour = document.createElement("div");
+  formPasswordPatternDivFour.classList.add("password-pattern-element");
+  formPasswordPatternDivFour.textContent = "lorem";
+  formPasswordPatternDiv.appendChild(formPasswordPatternDivOne);
+  formPasswordPatternDiv.appendChild(formPasswordPatternDivTwo);
+  formPasswordPatternDiv.appendChild(formPasswordPatternDivThree);
+  formPasswordPatternDiv.appendChild(formPasswordPatternDivFour);
+
   formPassword.appendChild(formPasswordPara);
   formPassword.appendChild(formPasswordInput);
   formPassword.appendChild(formPasswordValidationIconSpan);
   formPassword.appendChild(formPasswordErrorPara);
+  formPassword.appendChild(formPasswordPatternDiv);
 
   const formPasswordConfirmation = document.createElement("label");
   const formPasswordConfirmationPara = document.createElement("p");
@@ -295,6 +324,18 @@ const initialiseEventListeners = () => {
   document
     .querySelector("#zip-code")
     .addEventListener("focusout", formNumberInputValidation);
+  document
+    .querySelector("#password")
+    .addEventListener("input", formPasswordInputValidation);
+  document
+    .querySelector("#password")
+    .addEventListener("focusout", formPasswordInputValidation);
+  document
+    .querySelector("#password-confirmation")
+    .addEventListener("input", formPasswordConfimationInputValidation);
+  document
+    .querySelector("#password-confirmation")
+    .addEventListener("focusout", formPasswordConfimationInputValidation);
 
   document
     .querySelector(".submit-form-button")
