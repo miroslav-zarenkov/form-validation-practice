@@ -25,6 +25,14 @@ $color-blue: #181bb6;
   display: none;
 }
 
+.valid {
+  color: $color-green;
+}
+
+.invalid {
+  color: $color-red;
+}
+
 * {
   margin: 0;
   padding: 0;

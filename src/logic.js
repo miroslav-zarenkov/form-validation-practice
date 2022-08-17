@@ -6,6 +6,7 @@ export {
   formNumberInputValidation,
   formPasswordInputValidation,
   formPasswordConfimationInputValidation,
+  formPasswordInputValidationVisual,
 };
 import ValidInputIcon from "./valid.png";
 import InvalidInputIcon from "./invalid.png";
@@ -102,8 +103,6 @@ const formTextInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   }
   if (event.target.value.length === 30) {
-    event.target.classList.remove("invalid-data");
-    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Maximum 30 characters";
     event.target.parentNode
@@ -112,9 +111,6 @@ const formTextInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.parentNode
-      .querySelector("img")
-      .setAttribute("src", ValidInputIcon);
   }
 };
 
@@ -251,8 +247,6 @@ const formEmailInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   }
   if (event.target.value.length === 30) {
-    event.target.classList.remove("invalid-data");
-
     event.target.parentNode.querySelector(".error-p").textContent =
       "Maximum 30 characters";
     event.target.parentNode
@@ -261,10 +255,6 @@ const formEmailInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.classList.remove("invalid-data");
-    event.target.parentNode
-      .querySelector("img")
-      .setAttribute("src", ValidInputIcon);
   }
 };
 
@@ -341,8 +331,6 @@ const formPasswordInputValidation = (event) => {
       .setAttribute("src", InvalidInputIcon);
   }
   if (event.target.value.length === 30) {
-    event.target.classList.remove("invalid-data");
-    event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
       "Maximum 30 characters";
     event.target.parentNode
@@ -351,9 +339,6 @@ const formPasswordInputValidation = (event) => {
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.parentNode
-      .querySelector("img")
-      .setAttribute("src", ValidInputIcon);
   }
 };
 
@@ -362,25 +347,13 @@ const formPasswordConfimationInputValidation = (event) => {
   const inputPasswordConfirmation = document.querySelector(
     "#password-confirmation"
   );
-  console.log(inputPassword.value);
-  console.log(inputPasswordConfirmation.value);
-  if (inputPassword.value === inputPasswordConfirmation.value) {
-    event.target.classList.remove("invalid-data");
-    event.target.classList.add("valid-data");
-    event.target.parentNode.querySelector(".error-p").textContent =
-      "Everything OK!";
-    event.target.parentNode
-      .querySelector(".error-p")
-      .classList.remove("error-p-invalid");
-    event.target.parentNode.querySelector(".error-p").classList.add("hidden");
-    event.target.parentNode
-      .querySelector("img")
-      .setAttribute("src", ValidInputIcon);
-  } else {
+  if (inputPasswordConfirmation.validity.valueMissing) {
+    const inputName = event.target.previousElementSibling.textContent;
     event.target.classList.add("invalid-data");
     event.target.classList.remove("valid-data");
-    event.target.parentNode.querySelector(".error-p").textContent =
-      "This should never happen";
+    event.target.parentNode.querySelector(
+      ".error-p"
+    ).textContent = `You Forgot Your ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -390,21 +363,110 @@ const formPasswordConfimationInputValidation = (event) => {
     event.target.parentNode
       .querySelector("img")
       .setAttribute("src", InvalidInputIcon);
+    return;
   }
-  if (event.target.value.length === 30) {
-    event.target.classList.remove("invalid-data");
-    event.target.classList.add("valid-data");
-    event.target.parentNode.querySelector(".error-p").textContent =
-      "Maximum 30 characters";
-    event.target.parentNode
-      .querySelector(".error-p")
-      .classList.remove("hidden");
-    event.target.parentNode
+  if (inputPassword.value === inputPasswordConfirmation.value) {
+    inputPasswordConfirmation.classList.remove("invalid-data");
+    inputPasswordConfirmation.classList.add("valid-data");
+    inputPasswordConfirmation.parentNode.querySelector(".error-p").textContent =
+      "Everything OK!";
+    inputPasswordConfirmation.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.parentNode
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.add("hidden");
+    inputPasswordConfirmation.parentNode
       .querySelector("img")
       .setAttribute("src", ValidInputIcon);
+  } else if (inputPasswordConfirmation.validity.valueMissing) {
+    const inputName =
+      inputPasswordConfirmation.previousElementSibling.textContent;
+    inputPasswordConfirmation.classList.add("invalid-data");
+    inputPasswordConfirmation.classList.remove("valid-data");
+    inputPasswordConfirmation.parentNode.querySelector(
+      ".error-p"
+    ).textContent = `You Forgot Your ${inputName}`;
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.add("error-p-invalid");
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.remove("hidden");
+    inputPasswordConfirmation.parentNode
+      .querySelector("img")
+      .setAttribute("src", InvalidInputIcon);
+  } else {
+    inputPasswordConfirmation.classList.add("invalid-data");
+    inputPasswordConfirmation.classList.remove("valid-data");
+    inputPasswordConfirmation.parentNode.querySelector(".error-p").textContent =
+      "Passwords do not match";
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.add("error-p-invalid");
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.remove("hidden");
+    inputPasswordConfirmation.parentNode
+      .querySelector("img")
+      .setAttribute("src", InvalidInputIcon);
+  }
+  if (inputPasswordConfirmation.value.length === 30) {
+    inputPasswordConfirmation.parentNode.querySelector(".error-p").textContent =
+      "Maximum 30 characters";
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.remove("hidden");
+    inputPasswordConfirmation.parentNode
+      .querySelector(".error-p")
+      .classList.remove("error-p-invalid");
+  }
+};
+
+const formPasswordInputValidationVisual = () => {
+  const inputPassword = document.querySelector("#password");
+
+  let lowerCaseLetters = /[a-z]/g;
+  const lowerCaseDiv = document.querySelector("#password-pattern-lowercase");
+  if (inputPassword.value.match(lowerCaseLetters)) {
+    lowerCaseDiv.classList.remove("invalid");
+    lowerCaseDiv.classList.add("valid");
+  } else {
+    lowerCaseDiv.classList.remove("valid");
+    lowerCaseDiv.classList.add("invalid");
+  }
+
+  // Validate capital letters
+  let upperCaseLetters = /[A-Z]/g;
+  const upperCaseDiv = document.querySelector("#password-pattern-uppercase");
+  if (inputPassword.value.match(upperCaseLetters)) {
+    upperCaseDiv.classList.remove("invalid");
+    upperCaseDiv.classList.add("valid");
+  } else {
+    upperCaseDiv.classList.remove("valid");
+    upperCaseDiv.classList.add("invalid");
+  }
+
+  // Validate numbers
+  let numbers = /[0-9]/g;
+  const digitDiv = document.querySelector("#password-pattern-digit");
+  if (inputPassword.value.match(numbers)) {
+    digitDiv.classList.remove("invalid");
+    digitDiv.classList.add("valid");
+  } else {
+    digitDiv.classList.remove("valid");
+    digitDiv.classList.add("invalid");
+  }
+
+  // Validate length
+  const lengthDiv = document.querySelector("#password-pattern-minimum");
+  if (inputPassword.value.length >= 8) {
+    console.log("length");
+    lengthDiv.classList.remove("invalid");
+    lengthDiv.classList.add("valid");
+  } else {
+    lengthDiv.classList.remove("valid");
+    lengthDiv.classList.add("invalid");
   }
 };
 

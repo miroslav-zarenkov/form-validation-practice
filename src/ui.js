@@ -9,6 +9,7 @@ import {
   formNumberInputValidation,
   formPasswordInputValidation,
   formPasswordConfimationInputValidation,
+  formPasswordInputValidationVisual,
 } from "./logic";
 
 const createWrapper = () => {
@@ -192,16 +193,24 @@ const createForm = () => {
   formPasswordPatternDiv.classList.add("password-pattern");
   const formPasswordPatternDivOne = document.createElement("div");
   formPasswordPatternDivOne.classList.add("password-pattern-element");
-  formPasswordPatternDivOne.textContent = "lorem";
+  formPasswordPatternDivOne.classList.add("invalid");
+  formPasswordPatternDivOne.setAttribute("id", "password-pattern-uppercase");
+  formPasswordPatternDivOne.textContent = "1 uppercase letter";
   const formPasswordPatternDivTwo = document.createElement("div");
   formPasswordPatternDivTwo.classList.add("password-pattern-element");
-  formPasswordPatternDivTwo.textContent = "lorem";
+  formPasswordPatternDivTwo.classList.add("invalid");
+  formPasswordPatternDivTwo.setAttribute("id", "password-pattern-lowercase");
+  formPasswordPatternDivTwo.textContent = "1 lowercase letter";
   const formPasswordPatternDivThree = document.createElement("div");
   formPasswordPatternDivThree.classList.add("password-pattern-element");
-  formPasswordPatternDivThree.textContent = "lorem";
+  formPasswordPatternDivThree.classList.add("invalid");
+  formPasswordPatternDivThree.setAttribute("id", "password-pattern-digit");
+  formPasswordPatternDivThree.textContent = "1 digit";
   const formPasswordPatternDivFour = document.createElement("div");
   formPasswordPatternDivFour.classList.add("password-pattern-element");
-  formPasswordPatternDivFour.textContent = "lorem";
+  formPasswordPatternDivFour.classList.add("invalid");
+  formPasswordPatternDivFour.setAttribute("id", "password-pattern-minimum");
+  formPasswordPatternDivFour.textContent = "minimum 8 chars";
   formPasswordPatternDiv.appendChild(formPasswordPatternDivOne);
   formPasswordPatternDiv.appendChild(formPasswordPatternDivTwo);
   formPasswordPatternDiv.appendChild(formPasswordPatternDivThree);
@@ -326,10 +335,17 @@ const initialiseEventListeners = () => {
     .addEventListener("focusout", formNumberInputValidation);
   document
     .querySelector("#password")
+    .addEventListener("input", formPasswordConfimationInputValidation);
+  document
+    .querySelector("#password")
     .addEventListener("input", formPasswordInputValidation);
   document
     .querySelector("#password")
+    .addEventListener("input", formPasswordInputValidationVisual);
+  document
+    .querySelector("#password")
     .addEventListener("focusout", formPasswordInputValidation);
+
   document
     .querySelector("#password-confirmation")
     .addEventListener("input", formPasswordConfimationInputValidation);
@@ -346,3 +362,7 @@ const renderPage = (event) => {
   createPage(event);
   initialiseEventListeners();
 };
+
+function kek() {
+  console.log("you suck");
+}
