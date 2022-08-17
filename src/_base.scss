@@ -1,7 +1,6 @@
 $color-black: #000000;
 $color-white: #ffffff;
 $color-gray: #f2f2f2;
-$color-primary: #ecd7aa;
 $color-green: #18b64e;
 $color-red: #b61818;
 $color-blue: #181bb6;
@@ -44,5 +43,5 @@ html {
 }
 
 body {
-  background-color: $color-primary;
+  background-color: $color-gray;
 }

@@ -1,6 +1,7 @@
 export { renderPage };
 import "./style.scss";
 import GithubLogo from "./github.png";
+import ShowPasswordIcon from "./password-icon-show.png";
 import {
   submitForm,
   formNumberInputLimit,
@@ -10,6 +11,7 @@ import {
   formPasswordInputValidation,
   formPasswordConfimationInputValidation,
   formPasswordInputValidationVisual,
+  showPassword,
 } from "./logic";
 
 const createWrapper = () => {
@@ -171,6 +173,7 @@ const createForm = () => {
   const formPasswordPara = document.createElement("p");
   formPasswordPara.textContent = "Password";
   const formPasswordInput = document.createElement("input");
+  formPasswordInput.classList.add("password");
   formPasswordInput.setAttribute("type", "password");
   formPasswordInput.setAttribute("id", "password");
   formPasswordInput.setAttribute("name", "password");
@@ -184,6 +187,14 @@ const createForm = () => {
   const formPasswordValidationIconImg = document.createElement("img");
   formPasswordValidationIconImg.classList.add("validation-icon");
   formPasswordValidationIconSpan.appendChild(formPasswordValidationIconImg);
+
+  const formPasswordShowIconSpan = document.createElement("span");
+  formPasswordShowIconSpan.classList.add("show-password");
+  const formPasswordShowIconImg = document.createElement("img");
+  formPasswordShowIconImg.setAttribute("src", ShowPasswordIcon);
+  formPasswordShowIconImg.classList.add("validation-icon");
+  formPasswordShowIconSpan.appendChild(formPasswordShowIconImg);
+
   const formPasswordErrorPara = document.createElement("p");
   formPasswordErrorPara.classList.add("hidden");
   formPasswordErrorPara.classList.add("error-p");
@@ -219,6 +230,7 @@ const createForm = () => {
   formPassword.appendChild(formPasswordPara);
   formPassword.appendChild(formPasswordInput);
   formPassword.appendChild(formPasswordValidationIconSpan);
+  formPassword.appendChild(formPasswordShowIconSpan);
   formPassword.appendChild(formPasswordErrorPara);
   formPassword.appendChild(formPasswordPatternDiv);
 
@@ -226,11 +238,13 @@ const createForm = () => {
   const formPasswordConfirmationPara = document.createElement("p");
   formPasswordConfirmationPara.textContent = "Password Confirmation";
   const formPasswordConfirmationInput = document.createElement("input");
+  formPasswordConfirmationInput.classList.add("password");
   formPasswordConfirmationInput.setAttribute("type", "password");
   formPasswordConfirmationInput.setAttribute("id", "password-confirmation");
   formPasswordConfirmationInput.setAttribute("name", "password-confirmation");
   formPasswordConfirmationInput.setAttribute("maxlength", "30");
   formPasswordConfirmationInput.setAttribute("required", "");
+
   const formPasswordConfirmationValidationIconSpan =
     document.createElement("span");
   const formPasswordConfirmationValidationIconImg =
@@ -239,6 +253,16 @@ const createForm = () => {
   formPasswordConfirmationValidationIconSpan.appendChild(
     formPasswordConfirmationValidationIconImg
   );
+
+  const formPasswordConfirmationShowIconSpan = document.createElement("span");
+  formPasswordConfirmationShowIconSpan.classList.add("show-password");
+  const formPasswordConfirmationShowIconImg = document.createElement("img");
+  formPasswordConfirmationShowIconImg.setAttribute("src", ShowPasswordIcon);
+  formPasswordConfirmationShowIconImg.classList.add("validation-icon");
+  formPasswordConfirmationShowIconSpan.appendChild(
+    formPasswordConfirmationShowIconImg
+  );
+
   const formPasswordConfirmationErrorPara = document.createElement("p");
   formPasswordConfirmationErrorPara.classList.add("hidden");
   formPasswordConfirmationErrorPara.classList.add("error-p");
@@ -252,6 +276,7 @@ const createForm = () => {
   formPasswordConfirmation.appendChild(
     formPasswordConfirmationValidationIconSpan
   );
+  formPasswordConfirmation.appendChild(formPasswordConfirmationShowIconSpan);
   formPasswordConfirmation.appendChild(formPasswordConfirmationErrorPara);
 
   const formButtonWrapper = document.createElement("div");
@@ -346,6 +371,10 @@ const initialiseEventListeners = () => {
     .querySelector("#password")
     .addEventListener("focusout", formPasswordInputValidation);
 
+  document.querySelectorAll(".show-password").forEach((item) => {
+    item.addEventListener("click", showPassword);
+  });
+
   document
     .querySelector("#password-confirmation")
     .addEventListener("input", formPasswordConfimationInputValidation);
@@ -362,7 +391,3 @@ const renderPage = (event) => {
   createPage(event);
   initialiseEventListeners();
 };
-
-function kek() {
-  console.log("you suck");
-}

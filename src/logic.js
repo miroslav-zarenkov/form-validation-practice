@@ -7,9 +7,12 @@ export {
   formPasswordInputValidation,
   formPasswordConfimationInputValidation,
   formPasswordInputValidationVisual,
+  showPassword,
 };
 import ValidInputIcon from "./valid.png";
 import InvalidInputIcon from "./invalid.png";
+import ShowPasswordIcon from "./password-icon-show.png";
+import HidePasswordIcon from "./password-icon-hide.png";
 
 const submitForm = (event) => {
   event.preventDefault();
@@ -34,13 +37,30 @@ const submitForm = (event) => {
     clearFormInputs();
     showSubmitted();
   } else {
-    console.log("first name " + inputFirstName.validity.valid);
-    console.log("last name " + inputLastName.validity.valid);
-    console.log("email " + inputEmail.validity.valid);
-    console.log("country " + inputCountry.validity.valid);
-    console.log("zipcode " + inputZipCode.validity.valid);
-    console.log(inputPassword.value === inputPasswordConfirmation.value);
+    const allInputs = document.querySelectorAll("input");
+    allInputs.forEach((element) => {
+      if (!element.validity.valid) {
+        inputValidationOnSumbit(element.id);
+      }
+    });
   }
+};
+
+const inputValidationOnSumbit = (idOfInput) => {
+  const inputTarget = document.querySelector("#" + idOfInput);
+  const inputName = inputTarget.previousElementSibling.textContent;
+  inputTarget.classList.add("invalid-data");
+  inputTarget.classList.remove("valid-data");
+  inputTarget.parentNode.querySelector(
+    ".error-p"
+  ).textContent = `You Forgot ${inputName}`;
+  inputTarget.parentNode
+    .querySelector(".error-p")
+    .classList.add("error-p-invalid");
+  inputTarget.parentNode.querySelector(".error-p").classList.remove("hidden");
+  inputTarget.parentNode
+    .querySelector("img")
+    .setAttribute("src", InvalidInputIcon);
 };
 
 const clearFormInputs = () => {
@@ -77,7 +97,7 @@ const formTextInputValidation = (event) => {
     event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(
       ".error-p"
-    ).textContent = `You Forgot Your ${inputName}`;
+    ).textContent = `You Forgot ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -147,7 +167,7 @@ const formNumberInputValidation = (event) => {
     event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(
       ".error-p"
-    ).textContent = `You Forgot Your ${inputName}`;
+    ).textContent = `You Forgot ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -221,7 +241,7 @@ const formEmailInputValidation = (event) => {
     event.target.classList.add("invalid-data");
     event.target.parentNode.querySelector(
       ".error-p"
-    ).textContent = `You Forgot Your ${inputName}`;
+    ).textContent = `You Forgot ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -259,13 +279,8 @@ const formEmailInputValidation = (event) => {
 };
 
 const formNumberInputLimit = (event) => {
-  /*   let invalidChars = ["+", "e"];
-  if (invalidChars.includes(event.key)) event.preventDefault(); */
   let regex = new RegExp("^[0-9]+$");
   let key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-  console.log(event.charCode);
-  console.log(event.which);
-  console.log(event.charCode);
   if (!regex.test(key)) {
     event.preventDefault();
     return false;
@@ -277,11 +292,11 @@ const formPasswordInputValidation = (event) => {
     event.target.classList.remove("invalid-data");
     event.target.classList.add("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
-      "Everything OK!";
+      "Good password!";
     event.target.parentNode
       .querySelector(".error-p")
       .classList.remove("error-p-invalid");
-    event.target.parentNode.querySelector(".error-p").classList.add("hidden");
+    event.target.parentNode.querySelector(".error-p").classList.add("valid");
     event.target.parentNode
       .querySelector("img")
       .setAttribute("src", ValidInputIcon);
@@ -291,7 +306,7 @@ const formPasswordInputValidation = (event) => {
     event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(
       ".error-p"
-    ).textContent = `You Forgot Your ${inputName}`;
+    ).textContent = `You Forgot ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -302,10 +317,11 @@ const formPasswordInputValidation = (event) => {
       .querySelector("img")
       .setAttribute("src", InvalidInputIcon);
   } else if (event.target.validity.patternMismatch) {
+    document.querySelector(".password-pattern").style.display = "flex";
     event.target.classList.add("invalid-data");
     event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(".error-p").textContent =
-      "Pattern mismatch";
+      "Please use this pattern:";
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -353,7 +369,7 @@ const formPasswordConfimationInputValidation = (event) => {
     event.target.classList.remove("valid-data");
     event.target.parentNode.querySelector(
       ".error-p"
-    ).textContent = `You Forgot Your ${inputName}`;
+    ).textContent = `You Forgot ${inputName}`;
     event.target.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -386,7 +402,7 @@ const formPasswordConfimationInputValidation = (event) => {
     inputPasswordConfirmation.classList.remove("valid-data");
     inputPasswordConfirmation.parentNode.querySelector(
       ".error-p"
-    ).textContent = `You Forgot Your ${inputName}`;
+    ).textContent = `You Forgot ${inputName}`;
     inputPasswordConfirmation.parentNode
       .querySelector(".error-p")
       .classList.add("error-p-invalid");
@@ -436,7 +452,6 @@ const formPasswordInputValidationVisual = () => {
     lowerCaseDiv.classList.add("invalid");
   }
 
-  // Validate capital letters
   let upperCaseLetters = /[A-Z]/g;
   const upperCaseDiv = document.querySelector("#password-pattern-uppercase");
   if (inputPassword.value.match(upperCaseLetters)) {
@@ -447,7 +462,6 @@ const formPasswordInputValidationVisual = () => {
     upperCaseDiv.classList.add("invalid");
   }
 
-  // Validate numbers
   let numbers = /[0-9]/g;
   const digitDiv = document.querySelector("#password-pattern-digit");
   if (inputPassword.value.match(numbers)) {
@@ -458,10 +472,8 @@ const formPasswordInputValidationVisual = () => {
     digitDiv.classList.add("invalid");
   }
 
-  // Validate length
   const lengthDiv = document.querySelector("#password-pattern-minimum");
   if (inputPassword.value.length >= 8) {
-    console.log("length");
     lengthDiv.classList.remove("invalid");
     lengthDiv.classList.add("valid");
   } else {
@@ -470,11 +482,21 @@ const formPasswordInputValidationVisual = () => {
   }
 };
 
+const showPassword = (event) => {
+  const input = event.target.parentNode.parentNode.querySelector("input");
+  if (input.type === "password") {
+    input.type = "text";
+    event.target.setAttribute("src", HidePasswordIcon);
+  } else {
+    input.type = "password";
+    event.target.setAttribute("src", ShowPasswordIcon);
+  }
+};
+
 const showSubmitted = () => {
   document.querySelector(".form-wrapper").classList.add("none");
-  console.log("Submitted");
   const submittedInfo = document.createElement("div");
   submittedInfo.classList.add("submitted-data-div");
-  submittedInfo.textContent = "Data submitted";
+  submittedInfo.textContent = "Thank you!";
   document.querySelector("main").appendChild(submittedInfo);
 };
